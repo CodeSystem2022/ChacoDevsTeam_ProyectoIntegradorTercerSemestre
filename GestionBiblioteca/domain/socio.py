@@ -1,6 +1,5 @@
 from domain.persona import Persona
 
-
 class Socio(Persona):
     contador_socio = 0
 
@@ -37,3 +36,4 @@ class Socio(Persona):
     @libros_prestados.setter
     def libros_prestados(self, libros_prestados):
         self._libros_prestados = libros_prestados
+        
