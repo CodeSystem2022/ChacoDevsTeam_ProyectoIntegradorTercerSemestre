@@ -11,28 +11,28 @@ class SolicitudService:
 
     @classmethod
     def service_solicitud_alta(cls):
-        opcion = ""
-        while opcion != "3":
-            print("*" * 50)
-            print('SOLICITUD DE LIBRO'.center(50, ' '))
-            print("*" * 50)
-            print("1. Registrar una solicitud de un libro:\n2. Listar Solicitudes:\n3. Volver ")
-            print("*" * 50)
-            opcion = input('Elige una opción (1-3): ')
-            if opcion == "1":
-                try:
-                    registro_libro = cls.buscar_libro()
-                    if registro_libro is not None:
-                        cantidad = core_libro.ABMLibro.buscar_cantidad_libro_por_id(registro_libro)
-                        if cantidad[0] is not None:
-                            if cantidad[0] > 0:
-                                registro_socio = cls.buscar_socio()
-                                if registro_libro is not None and registro_socio is not None:
-                                    solicitud = Solicitud(registro_libro, registro_socio, obtener_fecha_hoy(),
+    opcion = ""
+    while opcion != "3":
+    print("*" * 50)
+    print('SOLICITUD DE LIBRO'.center(50, ' '))
+    print("*" * 50)
+    print("1. Registrar una solicitud de un libro:\n2. Listar Solicitudes:\n3. Volver ")
+    print("*" * 50)
+    opcion = input('Elige una opción (1-3): ')
+    if opcion == "1":
+    try:
+    registro_libro = cls.buscar_libro()
+    if registro_libro is not None:
+     cantidad = core_libro.ABMLibro.buscar_cantidad_libro_por_id(registro_libro)
+     if cantidad[0] is not None:
+     if cantidad[0] > 0:
+     registro_socio = cls.buscar_socio()
+     if registro_libro is not None and registro_socio is not None:
+     solicitud = Solicitud(registro_libro, registro_socio, obtener_fecha_hoy(),
                                                           estados_libros.EstadoLibro.NO_DEVUELTO.value)
-                                    core_solicitud.ABMSolicitud.nueva_solicitud(solicitud)
-                                    cant_lib = core_libro.ABMLibro.buscar_cantidad_libro_por_id(registro_libro)
-                                    cantidad_nueva = int(cant_lib[0]) + -1
+     core_solicitud.ABMSolicitud.nueva_solicitud(solicitud)
+     cant_lib = core_libro.ABMLibro.buscar_cantidad_libro_por_id(registro_libro)
+     cantidad_nueva = int(cant_lib[0]) + -1
                                     core_libro.ABMLibro.agregar_libro_existente(cantidad_nueva, registro_libro)
                             else:
                                 print(f'No hay existencia disponible para el libro: ')
