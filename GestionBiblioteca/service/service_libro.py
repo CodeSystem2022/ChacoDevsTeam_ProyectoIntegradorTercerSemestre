@@ -7,29 +7,29 @@ from ui.ui import mostrar_menu_principal_abm1 as ui_principal
 
 
 def service_libro():
-opcion = None
-while opcion != 6:
-try:
-print(f'\n')
-ui()
-opcion = int(input('Digite una opcion de menu (1-5):'))
-if opcion == 1:
-print("*" * 50)
-print('NUEVO LIBRO'.center(50))
-print("*" * 50)
-print('Ingrese los siguientes datos:')
-isbn = input('ISBN: ')
-reg_validar = core_libro.ABMLibro.buscar_libro_por_isbn(isbn)
-if reg_validar is not None:
-print(f'Ya existe un libro con dicho ISBN: {isbn} id libro: {reg_validar}')
-print('Debe acceder a la opcion modificar libro, agregar libro existente')
-else:
-titulo = input('Titulo: ')
-genero = input('Genero: ')
-anio_publicacion = int(input('anio de publicacion: '))
-cantidad = int(input('Cantidad de copias: '))
-editorial = input('Editorial: ')
-print("*" * 50)
+    opcion = None
+    while opcion != 6:
+        try:
+            print(f'\n')
+            ui()
+            opcion = int(input('Digite una opcion de menu (1-5):'))
+            if opcion == 1:
+                print("*" * 50)
+                print('NUEVO LIBRO'.center(50))
+                print("*" * 50)
+                print('Ingrese los siguientes datos:')
+                isbn = input('ISBN: ')
+                reg_validar = core_libro.ABMLibro.buscar_libro_por_isbn(isbn)
+                if reg_validar is not None:
+                    print(f'Ya existe un libro con dicho ISBN: {isbn} id libro: {reg_validar}')
+                    print('Debe acceder a la opcion modificar libro, agregar libro existente')
+                else:
+                    titulo = input('Titulo: ')
+                    genero = input('Genero: ')
+                    anio_publicacion = int(input('anio de publicacion: '))
+                    cantidad = int(input('Cantidad de copias: '))
+                    editorial = input('Editorial: ')
+                    print("*" * 50)
                     print('AUTOR'.center(50))
                     print("*" * 50)
                     print("Debe ingresar un modo de registro\n1: Nombre: \n2: Apellido: \n3: id:")
