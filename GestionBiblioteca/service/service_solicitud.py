@@ -206,3 +206,4 @@ class SolicitudService:
                     registro_libro = core_libro.ABMLibro.buscar_id_libro_por_id(ingreso)
 
         return registro_libro
+    
