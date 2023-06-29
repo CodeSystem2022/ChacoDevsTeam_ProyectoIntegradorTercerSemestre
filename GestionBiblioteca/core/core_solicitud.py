@@ -9,7 +9,7 @@ class ABMSolicitud:
 
     @classmethod
     def nueva_solicitud(cls, solicitud):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion.cursor() as cursor:
                 sentencia = f'INSERT INTO {cls.TABLA} (libro_id, socio_id, fecha_solicitud, estado) VALUES (%s, %s, %s, %s)'
@@ -25,7 +25,7 @@ class ABMSolicitud:
 
     @classmethod
     def listar_solicitudes(cls):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion:
                 with conexion.cursor() as cursor:
@@ -33,21 +33,18 @@ class ABMSolicitud:
                                 f'sol.libro_id = l.id_libro JOIN socio s ON sol.socio_id = s.id_socio where estado = %s '
                     cursor.execute(sentencia, estados_libros.EstadoLibro.NO_DEVUELTO.value)
                     registros = cursor.fetchall()
-                    if len(registros) > 0:
-                        for registro in registros:
-                            fecha_solicitud = registro[0]
-                            fecha_solicitud_formateada = fecha_solicitud.strftime('%d/%m/%Y')
-                            nuevo_registro = (fecha_solicitud_formateada, registro[1], registro[2])
-                            print(nuevo_registro)
-                    else:
-                        print(f'No existen registros cargados')
+                    for registro in registros:
+                        fecha_solicitud = registro[0]
+                        fecha_solicitud_formateada = fecha_solicitud.strftime('%d/%m/%Y')
+                        nuevo_registro = (fecha_solicitud_formateada, registro[1], registro[2])
+                        print(nuevo_registro)
         except Exception as e:
             print(f'Ocurrio un error {e}')
             logger_base.log.error(f'OCURRIO UN ERROR {e}')
 
     @classmethod
     def listar_solicitudes_por_id(cls, id_socio, id_libro):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion:
                 with conexion.cursor() as cursor:
@@ -70,7 +67,7 @@ class ABMSolicitud:
 
     @classmethod
     def listar_devolucion(cls):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion:
                 with conexion.cursor() as cursor:
@@ -88,7 +85,7 @@ class ABMSolicitud:
 
     @classmethod
     def listar_devolucion_socio(cls, socio_id):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion:
                 with conexion.cursor() as cursor:
@@ -107,7 +104,7 @@ class ABMSolicitud:
 
     @classmethod
     def listar_solicitud_socio(cls, socio_id):
-        conexion = db.DatabaseManager.obtener_conexion()
+        conexion = db.DatabaseManager.obtenerConexion()
         try:
             with conexion:
                 with conexion.cursor() as cursor:
@@ -116,13 +113,20 @@ class ABMSolicitud:
                                 f'AND socio_id = %s'
                     cursor.execute(sentencia, (estados_libros.EstadoLibro.NO_DEVUELTO.value, socio_id))
                     registros = cursor.fetchall()
-                    if len(registros) > 0:
-                        for registro in registros:
-                            fecha_solicitud = registro[0]
-                            fecha_solicitud_formateada = fecha_solicitud.strftime('%d/%m/%Y')
-                            nuevo_registro = (fecha_solicitud_formateada, registro[1], registro[2])
-                            print(nuevo_registro)
-                    else:
-                        print(f'No existen registros cargados')
+                    for registro in registros:
+                        fecha_solicitud = registro[0]
+                        fecha_solicitud_formateada = fecha_solicitud.strftime('%d/%m/%Y')
+                        nuevo_registro = (fecha_solicitud_formateada, registro[1], registro[2])
+                        print(nuevo_registro)
         except Exception as e:
             print(f'Ocurrio un error {e}')
+
+
+
+
+
+
+
+
+
+            
