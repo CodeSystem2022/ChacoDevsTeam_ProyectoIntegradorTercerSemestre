@@ -1,4 +1,3 @@
-import psycopg2
 import config.database_manager as db
 import config.logger_base as logger_base
 
