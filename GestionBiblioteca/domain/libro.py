@@ -1,5 +1,5 @@
 class Libro:
-    def _init_(self, titulo, genero, anio_publicacion, isbn, autor_id, cantidad, editorial):
+    def __init__(self, titulo, genero, anio_publicacion, isbn, autor_id, cantidad, editorial):
         self._titulo = titulo
         self._genero = genero
         self._anio_publicacion = anio_publicacion
@@ -8,7 +8,7 @@ class Libro:
         self._cantidad = cantidad
         self._editorial = editorial
 
-    def _str_(self):
+    def __str__(self):
         return f"Título: {self._titulo}, Autor: {self._autor_id}, Genero: {self._genero}, " \
                f"Anio Publicación: {self._anio_publicacion}, existencia: {self._cantidad} ISBN: {self._isbn} " \
                f"Editorial: {self._editorial}"
